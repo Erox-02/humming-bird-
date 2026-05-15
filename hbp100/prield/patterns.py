@@ -201,8 +201,13 @@ PATTERNS = {
         "has_groups": False,
     },
 }
+"""Simple pattern – entire match is sensitive
+"john@example.com" → "[EMAIL_1]"
 
-# Processing order – more specific patterns first to avoid false captures
+ Keyword pattern – preserves context, masks value
+"password: supersecret" → "password: [PASSWORD_1]"
+processing order – more specific patterns first to avoid false captures"""
+
 ORDERED_CATEGORIES = [
     "EMAIL",
     "IP_ADDRESS",
