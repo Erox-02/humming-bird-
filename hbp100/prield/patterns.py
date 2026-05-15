@@ -2,10 +2,10 @@
 
 import re
 
-# Each entry: 'regex': compiled pattern, 'has_groups': bool (True if pattern contains
-# a capturing group for the sensitive value plus a group for the prefix).
-# Convention: when has_groups=True, group(1) is the prefix / keyword / delimiter,
-# group(2) is the actual sensitive data.
+# Each entry contains:
+# - 'regex': compiled pattern
+# - 'has_groups': bool indicating if pattern uses keyword prefix groups
+#   (group(1)=prefix, group(2)=sensitive value when True)
 
 PATTERNS = {
     "EMAIL": {
@@ -21,7 +21,6 @@ PATTERNS = {
         "has_groups": False,
     },
     "URL_TOKEN": {
-        # token in URL query string: ?token=... or &token=...
         "regex": re.compile(
             r"[?&](?:token|access_token|auth|api_key)=([^&\s]+)", re.IGNORECASE
         ),
@@ -66,7 +65,9 @@ PATTERNS = {
         "has_groups": False,
     },
     "ROUTING_NUMBER": {
-        "regex": re.compile(r"(routing\s*(?:number|no)?\s*[:=]\s*)(\d{9})", re.IGNORECASE),
+        "regex": re.compile(
+            r"(routing\s*(?:number|no)?\s*[:=]\s*)(\d{9})", re.IGNORECASE
+        ),
         "has_groups": True,
     },
     "UPI_ID": {
@@ -90,7 +91,9 @@ PATTERNS = {
         "has_groups": False,
     },
     "PASSPORT": {
-        "regex": re.compile(r"(passport\s*(?:no|number)?\s*[:=]\s*)([A-Z0-9]{5,20})", re.IGNORECASE),
+        "regex": re.compile(
+            r"(passport\s*(?:no|number)?\s*[:=]\s*)([A-Z0-9]{5,20})", re.IGNORECASE
+        ),
         "has_groups": True,
     },
     "DRIVER_LICENSE": {
@@ -183,7 +186,6 @@ PATTERNS = {
         "has_groups": True,
     },
     "YEAR_ONLY": {
-        # standalone 4-digit year (1900-2099) – careful, only when no other pattern matches
         "regex": re.compile(r"\b(19|20)\d{2}\b"),
         "has_groups": False,
     },
@@ -192,7 +194,6 @@ PATTERNS = {
         "has_groups": False,
     },
     "ADDRESS": {
-        # simple US/UK street pattern
         "regex": re.compile(
             r"\b\d{1,5}\s+\w+(?:\s+\w+)*?\s+(?:street|st|avenue|ave|road|rd|lane|ln|drive|dr|court|ct|way|blvd|boulevard|place|pl)\b",
             re.IGNORECASE,
@@ -201,7 +202,7 @@ PATTERNS = {
     },
 }
 
-# Processing order – longer / more specific patterns first to avoid false captures.
+# Processing order – more specific patterns first to avoid false captures
 ORDERED_CATEGORIES = [
     "EMAIL",
     "IP_ADDRESS",
