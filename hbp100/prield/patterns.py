@@ -201,12 +201,13 @@ PATTERNS = {
         "has_groups": False,
     },
 }
-"""Simple pattern – entire match is sensitive
-"john@example.com" → "[EMAIL_1]"
+"""Adding a new pattern:
+"NEW_CATEGORY": {
+    "regex": re.compile(r"your_pattern_here"),
+    "has_groups": False,  # or True if keyword-based
+}
 
- Keyword pattern – preserves context, masks value
-"password: supersecret" → "password: [PASSWORD_1]"
-processing order – more specific patterns first to avoid false captures"""
+Then add to ORDERED_CATEGORIES at the right position"""
 
 ORDERED_CATEGORIES = [
     "EMAIL",
