@@ -30,12 +30,12 @@ Input	Output
 "What's my zodiac for 1990?"	"What's my zodiac for 1990?" (year kept)
 "I was born in 1990"	"I was born in [YEAR_ONLY_1]" (year masked)
 Why hbp100?
-Microsoft Presidio	hbp100
-Size	70MB	322KB
-Precision	85-90%	100%
-Latency	10-50ms	0.77ms
-Context-aware	❌	✅
-Edge-ready	❌	✅
+Microsoft Presidio|	hbp100
+Size	      70MB	| 322KB
+Precision	 85-90% |	100%
+Latency	  10-50ms |	0.77ms
+Context-aware	❌  |	✅
+Edge-ready	  ❌  |	✅
 License
 MIT
 
